@@ -25,7 +25,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List(resorts) { resort in
-                NavigationLink(destination: Text(resort.name)) {
+                NavigationLink(destination: ResortView(resort: resort)) {
                     Image(resort.country)
                         .resizable()
                         .scaledToFill()
@@ -51,8 +51,6 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
-    static let allResorts: [Resort] = Bundle.main.decode("resorts.json")
-       static let example = allResorts[0]
     
     static var previews: some View {
         ContentView()
