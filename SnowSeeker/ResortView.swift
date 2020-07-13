@@ -11,6 +11,8 @@ import SwiftUI
 struct ResortView: View {
     let resort: Resort
     
+    @Environment(\.horizontalSizeClass) var sizeClass
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
@@ -20,10 +22,16 @@ struct ResortView: View {
                 
                 Group {
                     HStack {
-                        Spacer()
-                        ResortDetailsView(resort: resort)
-                        SkiDetaisView(resort: resort)
-                        Spacer()
+                        if sizeClass == .compact {
+                            Spacer()
+                            VStack {ResortDetailsView(resort: resort)}
+                            VStack {SkiDetaisView(resort: resort)}
+                            Spacer()
+                        } else {
+                            ResortDetailsView(resort: resort)
+                            Spacer().frame(height: 0)
+                            SkiDetaisView(resort: resort)
+                        }
                     }
                     .font(.headline)
                     .foregroundColor(.secondary)
@@ -36,6 +44,7 @@ struct ResortView: View {
                     Text(ListFormatter.localizedString(byJoining: resort.facilities))
                         .padding(.vertical)
                 }
+                .padding(.horizontal)
             }
             .navigationBarTitle(Text("\(resort.name) \(resort.country)"), displayMode: .inline)
         }
