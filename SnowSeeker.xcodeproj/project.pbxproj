@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B901024C24BD7CB000FEDBAD /* Facility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B901024B24BD7CB000FEDBAD /* Facility.swift */; };
 		B9039B2024BB4F95002C8777 /* SkiDetaisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9039B1F24BB4F95002C8777 /* SkiDetaisView.swift */; };
 		B9039B2224BB50F0002C8777 /* ResortDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9039B2124BB50F0002C8777 /* ResortDetailsView.swift */; };
 		B92712F324BA43A400B12BFE /* resorts.json in Resources */ = {isa = PBXBuildFile; fileRef = B92712F224BA43A400B12BFE /* resorts.json */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B901024B24BD7CB000FEDBAD /* Facility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Facility.swift; sourceTree = "<group>"; };
 		B9039B1F24BB4F95002C8777 /* SkiDetaisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkiDetaisView.swift; sourceTree = "<group>"; };
 		B9039B2124BB50F0002C8777 /* ResortDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResortDetailsView.swift; sourceTree = "<group>"; };
 		B92712F224BA43A400B12BFE /* resorts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = resorts.json; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				B9E7491524BAF6F4001A9D4D /* WelcomeView.swift */,
 				B9B6593A24B8FA4700CD470B /* ContentView.swift */,
 				B9E7491724BB0D38001A9D4D /* ResortView.swift */,
+				B901024B24BD7CB000FEDBAD /* Facility.swift */,
 				B9039B1F24BB4F95002C8777 /* SkiDetaisView.swift */,
 				B9039B2124BB50F0002C8777 /* ResortDetailsView.swift */,
 				B9B6593C24B8FA5300CD470B /* Assets.xcassets */,
@@ -170,6 +173,7 @@
 			files = (
 				B9B6593724B8FA4700CD470B /* AppDelegate.swift in Sources */,
 				B9E7491624BAF6F4001A9D4D /* WelcomeView.swift in Sources */,
+				B901024C24BD7CB000FEDBAD /* Facility.swift in Sources */,
 				B9039B2024BB4F95002C8777 /* SkiDetaisView.swift in Sources */,
 				B9B6593924B8FA4700CD470B /* SceneDelegate.swift in Sources */,
 				B9E7491824BB0D38001A9D4D /* ResortView.swift in Sources */,
