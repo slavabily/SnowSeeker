@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct ResortView: View {
+    @EnvironmentObject var favorites: Favorites
+    
     let resort: Resort
     
     @Environment(\.horizontalSizeClass) var sizeClass
@@ -19,8 +21,8 @@ struct ResortView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 Image(decorative: resort.id)
-                .resizable()
-                .scaledToFit()
+                    .resizable()
+                    .scaledToFit()
                 
                 Group {
                     HStack {
@@ -57,10 +59,20 @@ struct ResortView: View {
                 .padding(.horizontal)
             }
             .navigationBarTitle(Text("\(resort.name) \(resort.country)"), displayMode: .inline)
+            
+            Button(favorites.contains(resort) ? "Remove from Favorites" : "Add to Favorites") {
+                if self.favorites.contains(self.resort) {
+                    self.favorites.remove(self.resort)
+                } else {
+                    self.favorites.add(self.resort)
+                }
+            }
+            .padding()
         }
         .alert(item: $selectedFacility) { (facility) -> Alert in
             facility.alert
         }
+        
     }
 }
 
