@@ -22,11 +22,33 @@ struct ContentView: View {
     
     @ObservedObject var favorites = Favorites()
     
+    @State private var showingActionSheet = false
+    @State private var sorter: SortType = .none
+    
     let resorts: [Resort] = Bundle.main.decode("resorts.json")
+    
+    enum SortType {
+        case none, alphabetical, country
+    }
+    
+    var sortedResorts: [Resort] {
+        switch sorter {
+        case .none:
+            return resorts
+        case .alphabetical:
+            return resorts.sorted {
+                $0.name < $1.name
+            }
+        case .country:
+            return resorts.sorted {
+                $0.country < $1.country
+            }
+        }
+    }
  
     var body: some View {
         NavigationView {
-            List(resorts) { resort in
+            List(sortedResorts) { resort in
                 NavigationLink(destination: ResortView(resort: resort)) {
                     Image(resort.country)
                         .resizable()
@@ -54,6 +76,20 @@ struct ContentView: View {
                 }
             }
             .navigationBarTitle("Resorts")
+            .navigationBarItems(leading: Button(action: {
+                self.showingActionSheet = true
+            }, label: {
+                Text("Sort")
+            }))
+                .actionSheet(isPresented: $showingActionSheet) {
+                    ActionSheet(title: Text("Sorting"), message: nil, buttons: [.default(Text("Default"), action: {
+                        self.sorter = .none
+                    }),.default(Text("Alphabetical"), action: {
+                        self.sorter = .alphabetical
+                    }),.default(Text("Country"), action: {
+                        self.sorter = .country
+                    })])
+            }
             
             WelcomeView()
         }
