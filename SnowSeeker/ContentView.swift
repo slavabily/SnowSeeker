@@ -21,11 +21,11 @@ extension View {
 struct ContentView: View {
     
     @ObservedObject var favorites = Favorites()
+    @ObservedObject var resorts = Resorts()
     
-    @State private var showingActionSheet = false
+    @State private var showingSortActionSheet = false
+    @State private var showingFilterSheet = false
     @State private var sorter: SortType = .none
-    
-    let resorts: [Resort] = Bundle.main.decode("resorts.json")
     
     enum SortType {
         case none, alphabetical, country
@@ -34,13 +34,13 @@ struct ContentView: View {
     var sortedResorts: [Resort] {
         switch sorter {
         case .none:
-            return resorts
+            return resorts.resorts
         case .alphabetical:
-            return resorts.sorted {
+            return resorts.resorts.sorted {
                 $0.name < $1.name
             }
         case .country:
-            return resorts.sorted {
+            return resorts.resorts.sorted {
                 $0.country < $1.country
             }
         }
@@ -77,11 +77,15 @@ struct ContentView: View {
             }
             .navigationBarTitle("Resorts")
             .navigationBarItems(leading: Button(action: {
-                self.showingActionSheet = true
+                self.showingSortActionSheet = true
             }, label: {
                 Text("Sort")
+            }), trailing: Button(action: {
+                self.showingFilterSheet = true
+            }, label: {
+                Text("Filter")
             }))
-                .actionSheet(isPresented: $showingActionSheet) {
+                .actionSheet(isPresented: $showingSortActionSheet) {
                     ActionSheet(title: Text("Sorting"), message: nil, buttons: [.default(Text("Default"), action: {
                         self.sorter = .none
                     }),.default(Text("Alphabetical"), action: {
@@ -90,7 +94,10 @@ struct ContentView: View {
                         self.sorter = .country
                     })])
             }
-            
+            .sheet(isPresented: $showingFilterSheet) {
+                FilterView(resorts: self.resorts)
+            }
+                      
             WelcomeView()
         }
         .environmentObject(favorites)
